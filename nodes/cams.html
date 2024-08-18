@@ -1,0 +1,51 @@
+<script type="text/html" data-template-name="intersvyaz-cams">
+	<div class="form-row">
+		<label for="node-input-settings"><i class="fa fa-cog"></i> Config</label>
+		<input id="node-input-settings" />
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-pencil"></i> Name</label>
+		<input type="text" id="node-input-name" />
+	</div>
+	<div class="form-row">
+		<label for="node-input-id"><i class="fa fa-tasks"></i> Entrance Uid</label>
+		<input type="text" id="node-input-entranceUids">
+		<input type="hidden" id="node-input-entranceType">
+	</div>
+	<div class="form-row">
+		<label for="node-input-topic"><i class="fa fa-envelope-o"></i> Topic</label>
+		<input type="text" id="node-input-topic">
+		<input type="hidden" id="node-input-topicType">
+	</div>
+</script>
+<script type="text/javascript">
+RED.nodes.registerType('intersvyaz-cams', {
+	category: 'Intersvyaz',
+	defaults: {
+		settings: { value: null, required: true, type: 'intersvyaz-config' },
+		name: { value: '' },
+		entranceUids: { value: 'entranceUids' },
+		entranceType: { value: 'msg' },
+		topic: { value: 'topic' },
+		topicType: { value: 'msg' }
+	},
+	icon: 'font-awesome/fa-video-camera',
+	inputs: 1,
+	outputs: 1,
+	color: '#4A6FD3',
+	paletteLabel: 'Cams',
+	label: function() {
+		return this.name || 'Cams';
+	},
+	oneditprepare: function() {
+		$('#node-input-entranceUids').typedInput({
+			types: [ 'str', 'msg' ],
+			typeField: '#node-input-entranceType'
+		});
+		$('#node-input-topic').typedInput({
+			types: [ 'str', 'msg', 'flow', 'global' ],
+			typeField: '#node-input-topicType'
+		});
+	}
+});
+</script>

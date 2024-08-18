@@ -1,0 +1,33 @@
+{
+	"name": "node-intersvyaz",
+	"version": "1.0.0",
+	"description": "Intercom control from intersvyaz",
+	"main": "main.mjs",
+	"node-red": {
+		"nodes": {
+			"config": "nodes/config.js",
+			"balance": "nodes/balance.js",
+			"domofon": "nodes/domofon.js",
+			"cams": "nodes/cams.js",
+			"history": "nodes/history.js",
+			"invite": "nodes/invite.js"
+		}
+	},
+	"files": [
+		"nodes/", "main.mjs"
+	],
+	"keywords": [
+		"nodejs", "node-red", "iot", "smart home", "automation", "Intercom", "is74", "intersvyaz"
+	],
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/alex2844/node-intersvyaz.git"
+	},
+	"author": {
+		"website": "https://alex2844.github.io/",
+		"github": "https://github.com/alex2844"
+	},
+	"dependencies": {
+		"sip": "github:kirm/sip.js"
+	}
+}

@@ -1,0 +1,62 @@
+<script type="text/html" data-template-name="intersvyaz-domofon">
+	<div class="form-row">
+		<label for="node-input-settings"><i class="fa fa-cog"></i> Config</label>
+		<input id="node-input-settings" />
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-pencil"></i> Name</label>
+		<input type="text" id="node-input-name" />
+	</div>
+	<div class="form-row">
+		<label for="node-input-id"><i class="fa fa-tasks"></i> Relay ID</label>
+		<input type="text" id="node-input-relayId">
+		<input type="hidden" id="node-input-relayType">
+	</div>
+	<div class="form-row">
+		<label for="node-input-id"><i class="fa fa-key"></i> Open</label>
+		<input type="text" id="node-input-open">
+		<input type="hidden" id="node-input-openType">
+	</div>
+	<div class="form-row">
+		<label for="node-input-topic"><i class="fa fa-envelope-o"></i> Topic</label>
+		<input type="text" id="node-input-topic">
+		<input type="hidden" id="node-input-topicType">
+	</div>
+</script>
+<script type="text/javascript">
+RED.nodes.registerType('intersvyaz-domofon', {
+	category: 'Intersvyaz',
+	defaults: {
+		settings: { value: null, required: true, type: 'intersvyaz-config' },
+		name: { value: '' },
+		relayId: { value: 'relayId' },
+		relayType: { value: 'msg' },
+		open: { value: 'open' },
+		openType: { value: 'msg' },
+		topic: { value: 'topic' },
+		topicType: { value: 'msg' }
+	},
+	icon: 'font-awesome/fa-list',
+	inputs: 1,
+	outputs: 1,
+	color: '#4A6FD3',
+	paletteLabel: 'Domofon',
+	label: function() {
+		return this.name || 'Domofon';
+	},
+	oneditprepare: function() {
+		$('#node-input-relayId').typedInput({
+			types: [ 'str', 'msg' ],
+			typeField: '#node-input-relayType'
+		});
+		$('#node-input-open').typedInput({
+			types: [ 'msg', 'bool' ],
+			typeField: '#node-input-openType'
+		});
+		$('#node-input-topic').typedInput({
+			types: [ 'str', 'msg', 'flow', 'global' ],
+			typeField: '#node-input-topicType'
+		});
+	}
+});
+</script>

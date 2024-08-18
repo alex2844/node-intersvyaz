@@ -1,0 +1,51 @@
+<script type="text/html" data-template-name="intersvyaz-history">
+	<div class="form-row">
+		<label for="node-input-settings"><i class="fa fa-cog"></i> Config</label>
+		<input id="node-input-settings" />
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-pencil"></i> Name</label>
+		<input type="text" id="node-input-name" />
+	</div>
+	<div class="form-row">
+		<label for="node-input-id"><i class="fa fa-filter"></i> Filter</label>
+		<input type="text" id="node-input-filter">
+		<input type="hidden" id="node-input-filterType">
+	</div>
+	<div class="form-row">
+		<label for="node-input-topic"><i class="fa fa-envelope-o"></i> Topic</label>
+		<input type="text" id="node-input-topic">
+		<input type="hidden" id="node-input-topicType">
+	</div>
+</script>
+<script type="text/javascript">
+RED.nodes.registerType('intersvyaz-history', {
+	category: 'Intersvyaz',
+	defaults: {
+		settings: { value: null, required: true, type: 'intersvyaz-config' },
+		name: { value: '' },
+		filter: { value: 'filter' },
+		filterType: { value: 'msg' },
+		topic: { value: 'topic' },
+		topicType: { value: 'msg' }
+	},
+	icon: 'font-awesome/fa-history',
+	inputs: 1,
+	outputs: 1,
+	color: '#4A6FD3',
+	paletteLabel: 'History',
+	label: function() {
+		return this.name || 'History';
+	},
+	oneditprepare: function() {
+		$('#node-input-filter').typedInput({
+			types: [ 'msg', 'json' ],
+			typeField: '#node-input-filterType'
+		});
+		$('#node-input-topic').typedInput({
+			types: [ 'str', 'msg', 'flow', 'global' ],
+			typeField: '#node-input-topicType'
+		});
+	}
+});
+</script>

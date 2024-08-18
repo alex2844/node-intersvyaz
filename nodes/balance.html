@@ -1,0 +1,27 @@
+<script type="text/html" data-template-name="intersvyaz-balance">
+	<div class="form-row">
+		<label for="node-input-settings"><i class="fa fa-cog"></i> Config</label>
+		<input id="node-input-settings" />
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-pencil"></i> Name</label>
+		<input type="text" id="node-input-name" />
+	</div>
+</script>
+<script type="text/javascript">
+RED.nodes.registerType('intersvyaz-balance', {
+	category: 'Intersvyaz',
+	defaults: {
+		settings: { value: null, required: true, type: 'intersvyaz-config' },
+		name: { value: '' }
+	},
+	icon: 'font-awesome/fa-credit-card',
+	inputs: 1,
+	outputs: 1,
+	color: '#4A6FD3',
+	paletteLabel: 'Balance',
+	label: function() {
+		return this.name || 'Balance';
+	}
+});
+</script>
