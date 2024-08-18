@@ -27,6 +27,7 @@
 		"website": "https://alex2844.github.io/",
 		"github": "https://github.com/alex2844"
 	},
+	"license": "MIT",
 	"dependencies": {
 		"sip": "github:kirm/sip.js"
 	}
