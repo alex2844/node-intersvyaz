@@ -18,6 +18,12 @@ Get a list of intercoms, and open an intercom
 | *`topic`*     | string    | Title
 
 
+| topic     | Description
+| ---       | ---
+| *list*    | List of intercoms
+| *open*    | Open the intercom
+
+
 ### Output
 
 | msg       | type

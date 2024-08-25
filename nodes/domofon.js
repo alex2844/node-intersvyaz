@@ -7,8 +7,10 @@ module.exports = function(RED) {
 			const open = RED.util.evaluateNodeProperty(config.open, config.openType, this, msg);
 			const topic = RED.util.evaluateNodeProperty(config.topic, config.topicType, this, msg);
 			settings.getClient().then(client => {
-				if (open)
+				if ((topic === 'open') || open)
 					return client.openDomofon(relayId);
+				else if (topic === 'list')
+					return client.getDomofon();
 				else
 					return client.getDomofon(relayId);
 			})

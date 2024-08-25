@@ -10,11 +10,13 @@
 | Security      | Security in case of vulnerabilities           | Безопасность в случае уязвимостей
 
 
-## [Unreleased](../../../compare/1.0.0...HEAD)
+## [Unreleased](../../../compare/1.0.1...HEAD)
 
 ## [1.0.1](../../../releases/tag/1.0.1) - 2028-08-25
 ### Changed
 - getBalance return nextPayment
+### Added
+- Node-RED: domofon support topics: list and open
 
 ## [1.0.0](../../../releases/tag/1.0.0) - 2028-08-18
 ### Added
