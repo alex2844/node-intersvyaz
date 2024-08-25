@@ -16,6 +16,7 @@
 | `payload` |
 
 
-| payload           | Описание
-| ---               | ---
-| `BALANCE_CURR`    | Текущий баланс
+| payload       | Описание
+| ---           | ---
+| `balance`     | Текущий баланс
+| `nextPayment` | Следующий платеж

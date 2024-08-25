@@ -12,6 +12,10 @@
 
 ## [Unreleased](../../../compare/1.0.0...HEAD)
 
+## [1.0.1](../../../releases/tag/1.0.1) - 2028-08-25
+### Changed
+- getBalance return nextPayment
+
 ## [1.0.0](../../../releases/tag/1.0.0) - 2028-08-18
 ### Added
 - Init

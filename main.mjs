@@ -179,9 +179,14 @@ export class Intersvyaz extends EventEmitter {
 	async getBalance() {
 		return fetch('https://api.is74.ru/user/balance', {
 			headers: {
-				authorization: 'Bearer '+(await this.accessToken)
+				authorization: 'Bearer '+(await this.accessToken),
+				accept: 'application/json; version=v2'
 			}
-		}).then(e => e.json());
+		}).then(e => e.json()).then(json => {
+			json.balance = parseFloat(json.balance);
+			json.nextPayment.pay = parseFloat(json.nextPayment.pay);
+			return json;
+		});
 	};
 	async getDomofon(relayId) {
 		return fetch('https://api.is74.ru/domofon/relays'+(relayId ? '/'+relayId : ''), {

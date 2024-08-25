@@ -16,6 +16,7 @@ Get the current balance
 | `payload` |
 
 
-| payload           | Description
-| ---               | ---
-| `BALANCE_CURR`    | Current balance
+| payload       | Description
+| ---           | ---
+| `balance`     | Current balance
+| `nextPayment` | Next payment
