@@ -17,6 +17,8 @@
 - getBalance return nextPayment
 ### Added
 - Node-RED: domofon support topics: list and open
+### Fixed
+- workflows: docs fix table of contents
 
 ## [1.0.0](../../../releases/tag/1.0.0) - 2028-08-18
 ### Added

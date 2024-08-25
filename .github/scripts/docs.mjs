@@ -20,7 +20,7 @@ function readMarkdown(filename) {
 		const content = readMarkdown(path.join(path.dirname(path.resolve(filename)), file));
 		if (!content)
 			return;
-		lines[i] = lines[i].replace(file, '#'+title.toLowerCase());
+		lines[i] = lines[i].replace(file, '#'+title.toLowerCase().replace(/ /g, '-'));
 		lines.push('', '', '## '+title, '', content);
 	});
 	return lines.join('\n').trim();
