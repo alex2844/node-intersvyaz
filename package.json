@@ -1,6 +1,6 @@
 {
 	"name": "node-intersvyaz",
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "Intercom control from intersvyaz",
 	"main": "main.mjs",
 	"node-red": {
@@ -10,7 +10,8 @@
 			"domofon": "nodes/domofon.js",
 			"cams": "nodes/cams.js",
 			"history": "nodes/history.js",
-			"invite": "nodes/invite.js"
+			"invite": "nodes/invite.js",
+			"iptv": "nodes/iptv.js"
 		}
 	},
 	"files": [

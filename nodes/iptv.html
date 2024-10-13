@@ -1,0 +1,65 @@
+<script type="text/html" data-template-name="intersvyaz-iptv">
+	<div class="form-row">
+		<label for="node-input-settings"><i class="fa fa-cog"></i> Config</label>
+		<input id="node-input-settings" />
+	</div>
+	<div class="form-row">
+		<label for="node-input-name"><i class="fa fa-pencil"></i> Name</label>
+		<input type="text" id="node-input-name" />
+	</div>
+	<div class="form-row">
+		<label for="node-input-id"><i class="fa fa-filter"></i> Filter</label>
+		<input type="text" id="node-input-filter">
+		<input type="hidden" id="node-input-filterType">
+	</div>
+	<div class="form-row">
+		<label for="node-input-topic"><i class="fa fa-copy"></i> Format</label>
+		<input type="text" id="node-input-format">
+		<input type="hidden" id="node-input-formatType">
+	</div>
+	<div class="form-row">
+		<label for="node-input-topic"><i class="fa fa-envelope-o"></i> Topic</label>
+		<input type="text" id="node-input-topic">
+		<input type="hidden" id="node-input-topicType">
+	</div>
+</script>
+<script type="text/javascript">
+RED.nodes.registerType('intersvyaz-iptv', {
+	category: 'Intersvyaz',
+	defaults: {
+		settings: { value: null, required: true, type: 'intersvyaz-config' },
+		name: { value: '' },
+		filter: { value: 'filter' },
+		filterType: { value: 'msg' },
+		format: { value: 'json' },
+		formatType: { value: 'format' },
+		topic: { value: 'topic' },
+		topicType: { value: 'msg' }
+	},
+	icon: 'font-awesome/fa-television',
+	inputs: 1,
+	outputs: 1,
+	color: '#4A6FD3',
+	paletteLabel: 'IPTV',
+	label: function() {
+		return this.name || 'IPTV';
+	},
+	oneditprepare: function() {
+		$('#node-input-filter').typedInput({
+			types: [ 'msg', 'json' ],
+			typeField: '#node-input-filterType'
+		});
+		$('#node-input-format').typedInput({
+			types: [ 'msg', {
+				value: 'format',
+				options: [ 'text', 'json' ]
+			}],
+			typeField: '#node-input-formatType'
+		});
+		$('#node-input-topic').typedInput({
+			types: [ 'str', 'msg', 'flow', 'global' ],
+			typeField: '#node-input-topicType'
+		});
+	}
+});
+</script>

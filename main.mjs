@@ -146,6 +146,12 @@ export class Intersvyaz extends EventEmitter {
 			});
 		});
 	};
+	formatDate(date) {
+		const year = date.getFullYear();
+		const month = (date.getMonth() + 1).toString().padStart(2, '0');
+		const day = date.getDate().toString().padStart(2, '0');
+		return `${year}-${month}-${day}`;
+	};
 	toDate(string) {
 		let [ day, month, yearTime ] = string.split('.');
 		let [ year, time ] = yearTime.split(' ');
@@ -153,7 +159,7 @@ export class Intersvyaz extends EventEmitter {
 		return new Date(`${year}-${month}-${day}T${hours}:${minutes}:00`);
 	};
 	toParams(json, prefix='?') {
-		return !json ? '' : prefix+(decodeURIComponent(new URLSearchParams(json).toString()));
+		return (!json || !Object.keys(json).length) ? '' : prefix+(decodeURIComponent(new URLSearchParams(json).toString()));
 	};
 	async getStatus() {
 		return fetch('https://api.is74.ru/user/service/status', {
@@ -246,6 +252,50 @@ export class Intersvyaz extends EventEmitter {
 				authorization: 'Bearer '+(await this.lkToken)
 			}
 		}).then(e => e.json());
+	};
+	async getIPTV(filter, format='json') {
+		const categories = [
+			{ ids: [ 4, 18 ], name: 'Основные' },
+			{ ids: [ 9 ], name: 'Новости' },
+			{ ids: [ 10 ], name: 'Кино' },
+			{ ids: [ 15 ], name: 'Детские' },
+			{ ids: [ 14 ], name: 'Спорт' },
+			{ ids: [ 13 ], name: 'Музыка' },
+			{ ids: [ 5 ], name: 'Познавательные' },
+			{ ids: [ 6, 17, 20, 12, 16 ], name: 'Развлекательные' }
+		];
+		const token = await this.accessToken;
+		const channels = await fetch('https://api.is74.ru/tv/channels'+this.toParams({
+			...filter,
+			checkAccess: 1,
+			expand: 'canEther, canArchive, stream, logoUrl'
+		}), {
+			headers: {
+				authorization: `Bearer ${token}`
+			}
+		}).then(res => res.json());
+		if (!channels.length)
+			throw new Error('channel not found');
+		const url = await fetch(channels[0].stream, {
+			method: 'HEAD',
+			headers: {
+				authorization: `Bearer ${token}`
+			}
+		}).then(res => new URL(res.url).origin);
+		channels.forEach(channel => {
+			channel.topic = categories.find(category => category.ids.includes(channel.TOPIC_ID))?.name || 'General';
+			channel.hls = `${url}/${channel.IPTV_ALIAS}/video.m3u8`+this.toParams({
+				'access-token': token
+			});
+		});
+		if (format === 'text')
+			return [ '#EXTM3U' ].concat(
+				channels.map(channel => [
+					`#EXTINF:-1 tvg-id="${channel.IPTV_ALIAS}" tvg-logo="${channel.logoUrl}" group-title="${channel.topic}",${channel.NAME}`,
+					channel.hls
+				].join('\n'))
+			).join('\n');
+		return channels;
 	};
 };
 export default Intersvyaz;

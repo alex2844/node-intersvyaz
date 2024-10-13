@@ -73,6 +73,15 @@ await client.getHistory({
 });
 ```
 
+### Получить список IPTV
+```javascript
+await client.getIPTV();
+await client.getIPTV({
+    channelId: 1640,
+    topicId: '6,17,20,12,16'
+});
+```
+
 ### SIP
 ```javascript
 await client.start();

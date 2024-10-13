@@ -15,3 +15,4 @@
 | [Cameras](en-US/node-red/cams.md) | [Камеры](ru/node-red/cams.md)
 | [History](en-US/node-red/history.md) | [История](ru/node-red/history.md)
 | [Incoming Call](en-US/node-red/invite.md) | [Входящий звонок](ru/node-red/invite.md)
+| [IPTV](en-US/node-red/iptv.md) | [IPTV](ru/node-red/iptv.md)
