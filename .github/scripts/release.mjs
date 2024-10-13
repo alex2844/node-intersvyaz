@@ -11,17 +11,19 @@ function main(github, context) {
 		repo: context?.repo.repo
 	}).then(({ data: [ latest ] }) => {
 		if (latest?.tag_name != pkg.version) {
-			const log = fs.readFileSync('docs/CHANGELOG.md', 'utf-8');
-			const body = log.split('## [').find(tag => tag.startsWith(pkg.version+']'))?.split('\n').slice(1).join('\n').trim();
-			return github.rest.repos.createRelease({
-				body,
+			const release = {
 				tag_name: pkg.version,
 				name: 'Release '+pkg.version,
 				owner: context?.repo.owner,
 				repo: context?.repo.repo
-			}).then(release => {
-				return true;
-			});
+			};
+			const log = fs.existsSync('docs/CHANGELOG.md') ? fs.readFileSync('docs/CHANGELOG.md', 'utf-8') : null;
+			const body = log?.split('## [').find(tag => tag.startsWith(pkg.version+']'))?.split('\n').slice(1).join('\n').trim();
+			if (body)
+				release.body = body;
+			else
+				release.generate_release_notes = true;
+			return github.rest.repos.createRelease(release).then(release => true);
 		}else
 			return false;
 	});

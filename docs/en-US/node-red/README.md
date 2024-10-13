@@ -23,3 +23,4 @@ npm install node-red-contrib-intersvyaz
 - [Cameras](cams.md)
 - [History](history.md)
 - [Incoming Call](invite.md)
+- [IPTV](iptv.md)
